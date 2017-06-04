@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "soundManager.dart";
 import 'package:audioplayer/audioplayer.dart';
+import "dart:async";
 
 class Grid extends StatefulWidget {
   @override
@@ -16,7 +17,9 @@ class _Grid extends State<Grid> {
   @override
   void initState(){
     super.initState();
-    playRandomSequence();
+    new Timer(new Duration(seconds: 1), (){
+      playSequence(random: true);
+    });
   }
 
   List<Widget> buildSlides(){
@@ -52,7 +55,7 @@ class _Grid extends State<Grid> {
       if (results[i] != 0){
         setState((){
           values[i] += results[i];
-          colors[i] = Colors.red;
+          colors[i] = (results[i] == 1) ? Colors.orange : Colors.red;
         });
       }
     }
@@ -69,6 +72,7 @@ class _Grid extends State<Grid> {
       ),
       body: new Container(
         child: new ListView(
+          padding: new EdgeInsets.all(50.0),
           children: [
             new Column(
               children: sliders,
@@ -82,6 +86,12 @@ class _Grid extends State<Grid> {
                     onPressed: () {
                       var results = getDifferenceToExactResult();
                       displayResults(results);
+                    },
+                  ),
+                  new RaisedButton(
+                    child: new Text("Replay", style: new TextStyle(fontSize: 20.0)),
+                    onPressed: () {
+                      playSequence(random: false);
                     },
                   ),
                 ]
