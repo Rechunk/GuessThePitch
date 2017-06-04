@@ -8,7 +8,10 @@ import 'dart:io';
 
 typedef void OnError(Exception exception);
 
+//enum PlayerState { isPlaying, isStopped }
+
 AudioPlayer audioPlayer = new AudioPlayer();
+
 int pickRandomSoundFrequency(){
   return new Random().nextInt(5) + 1;
 }
@@ -17,22 +20,27 @@ List<int> randomFrequencies = [];
 play(int soundFrequency) async {
   final result = await audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav");
 }
-playRandomSequence() async {
-  for (int i = 0; i < 5; i++){
-    randomFrequencies.add(pickRandomSoundFrequency());
+playSequence({random: true}) async {
+
+  if (random) {
+    randomFrequencies = [];
+    for (int i = 0; i < 5; i++) {
+      randomFrequencies.add(pickRandomSoundFrequency());
+    }
   }
-  print("RANDOM FREQUENCIES : ${randomFrequencies}");
-  //audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${pickRandomSoundFrequency().toString()}.wav");
-}
-play2(int soundFrequency) async {
-  audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav");
-}
-play3(int soundFrequency) async {
-  final result = audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav").then(play4(pickRandomSoundFrequency()));
-}
-play4(int soundFrequency) async {
-  final result = audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav").then(play5(pickRandomSoundFrequency()));
-}
-play5(int soundFrequency) async {
-  final result = audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav");
+
+  audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[0].toString()}.wav");
+  new Timer(new Duration(milliseconds: 500), () async {
+    audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[1].toString()}.wav");
+  });
+  new Timer(new Duration(milliseconds: 1000), () async {
+    audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[2].toString()}.wav");
+  });
+  new Timer(new Duration(milliseconds: 1500), () async {
+    audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[3].toString()}.wav");
+  });
+  new Timer(new Duration(milliseconds: 2000), () async {
+    audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[4].toString()}.wav");
+  });
+  print(randomFrequencies);
 }
