@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import "soundManager.dart";
-import 'package:audioplayer/audioplayer.dart';
 import "dart:async";
-import "route.dart";
 import "config.dart";
 
 class Grid extends StatefulWidget {
@@ -34,19 +32,23 @@ class _Grid extends State<Grid> {
   List<Widget> buildSlides(){
     List<Widget> sliders = [];
     for (int i = 0; i < 5; i++){
-      sliders.add(new Slider(
-        value: values[i].toDouble(),
-        min: 0.0,
-        max: 5.0,
-        divisions: 5,
-        label: '${values[i]}',
-        activeColor: colors[i],
-        onChanged: (double newValue) {
-          setState(() {
-            values[i] = newValue.round();
-          });
-        },
-      ));
+      sliders.add(
+        new Padding(
+          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: new Slider(
+            value: values[i].toDouble(),
+            min: 0.0,
+            max: 5.0,
+            divisions: 5,
+            label: '${values[i]}',
+            activeColor: colors[i],
+            onChanged: (double newValue) {
+              setState(() {
+                values[i] = newValue.round();
+              });
+            },
+          )
+        ));
     }
     return sliders;
   }
@@ -78,10 +80,6 @@ class _Grid extends State<Grid> {
     }
   }
 
-  void calculateResults(){
-
-  }
-
   bool madeMistake(results){
     for (var elem in results){
       if (elem != 0){
@@ -95,16 +93,14 @@ class _Grid extends State<Grid> {
   build(BuildContext context){
     sliders = buildSlides();
     return new Scaffold(
-      appBar: new AppBar(
-        leading: new Container(),
-        title: new Text("Guess The Pitch!"),
-        backgroundColor: Colors.red,
-        elevation: 1.0,
-      ),
+
       body: new Container(
         child: new ListView(
           padding: new EdgeInsets.all(50.0),
           children: [
+            new Center(
+              child: new Text("$score", style: new TextStyle(fontFamily: "Coiny", fontSize: 60.0, color: mainColor))
+            ),
             new Column(
               children: sliders,
             ),
@@ -133,7 +129,6 @@ class _Grid extends State<Grid> {
                   ),
                   new Padding(
                     padding: new EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                    child: new Text(resultsText, style: new TextStyle(fontSize: 20.0)),
                   )
                 ]
               ),
