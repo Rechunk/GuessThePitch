@@ -6,7 +6,7 @@ String helpText = "Das Spiel beginnt, sobald du auf 'Play' drückst. "
     "indem du sie einzeln bewegst. Drücke anschließend auf 'Done' und schaue "
     "dir deine Ergebnisse an!";
 
-Color mainColor = Colors.red;
+Color mainColor = new Color(0xFFFF5722);
 
 FractionalOffsetTween rightToLeft = new FractionalOffsetTween(
 begin: FractionalOffset.topRight,
