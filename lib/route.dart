@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 
+FractionalOffsetTween rightToLeft = new FractionalOffsetTween(
+  begin: FractionalOffset.topRight,
+  end: FractionalOffset.topLeft,
+);
+
+FractionalOffsetTween leftToRight = new FractionalOffsetTween(
+  begin: new FractionalOffset(-1.0, 0.0),
+  end: FractionalOffset.topLeft,
+);
+
 class CustomRoute<T> extends MaterialPageRoute<T> {
-  FractionalOffsetTween tw;
-  CustomRoute(FractionalOffsetTween tween, {
+  FractionalOffsetTween tween;
+  CustomRoute({
     WidgetBuilder builder,
-  }): this.tw = tween, super(builder: builder);
+    FractionalOffsetTween navigationDirection,
+  }): this.tween = navigationDirection, super(builder: builder);
 
   @override
   Widget buildTransitions(BuildContext context,
@@ -16,7 +27,7 @@ class CustomRoute<T> extends MaterialPageRoute<T> {
       return child;
 
     return new SlideTransition(
-      position: tw
+      position: tween
           .animate(
           new CurvedAnimation(
             parent: animation,

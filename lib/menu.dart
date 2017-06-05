@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import "options.dart";
-import "countdown.dart";
 import "route.dart";
 import "grid.dart";
 import "config.dart";
@@ -30,7 +29,7 @@ class _Menu extends State<Menu> {
                     padding: new EdgeInsets.all(13.0),
                     child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Play", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       Navigator.push(context, new CustomRoute(
-                          rightToLeft,
+                          navigationDirection: rightToLeft,
                           builder: (_) => new Grid()
                       ));
                     }),
@@ -39,7 +38,7 @@ class _Menu extends State<Menu> {
                     padding: new EdgeInsets.all(13.0),
                     child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Options", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       Navigator.push(context, new CustomRoute(
-                          leftToRight,
+                          navigationDirection: leftToRight,
                           builder: (_) => new Options()
                       ));
                     }),
@@ -48,7 +47,7 @@ class _Menu extends State<Menu> {
                     padding: new EdgeInsets.all(13.0),
                     child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Help", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       Navigator.push(context, new CustomRoute(
-                          leftToRight,
+                          navigationDirection: leftToRight,
                           builder: (_) => new Help()
                       ));
                     }),
