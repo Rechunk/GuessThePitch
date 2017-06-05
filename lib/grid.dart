@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import "soundManager.dart";
 import 'package:audioplayer/audioplayer.dart';
 import "dart:async";
+import "route.dart";
+import "config.dart";
 
 class Grid extends StatefulWidget {
   @override
@@ -13,10 +15,17 @@ class _Grid extends State<Grid> {
   List<int> values = [0,0,0,0,0];
   List<Color> colors = new List.generate(5, (i) => Colors.blue);
   List<Widget> sliders = [];
+  String resultsText = "";
+  AnimationController controller;
+  int score = 0;
 
   @override
   void initState(){
     super.initState();
+    revealSequence();
+  }
+
+  void revealSequence(){
     new Timer(new Duration(seconds: 1), (){
       playSequence(random: true);
     });
@@ -50,7 +59,7 @@ class _Grid extends State<Grid> {
     return differences;
   }
 
-  void displayResults(var results){
+  void correctSliders(var results){
     for (int i = 0; i < results.length; i++){
       if (results[i] != 0){
         setState((){
@@ -61,12 +70,34 @@ class _Grid extends State<Grid> {
     }
   }
 
+  void resetSliders(){
+    for (int i = 0; i < values.length; i++){
+      setState((){
+        values[i] = 0;
+      });
+    }
+  }
+
+  void calculateResults(){
+
+  }
+
+  bool madeMistake(results){
+    for (var elem in results){
+      if (elem != 0){
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   build(BuildContext context){
     sliders = buildSlides();
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Game"),
+        leading: new Container(),
+        title: new Text("Guess The Pitch!"),
         backgroundColor: Colors.red,
         elevation: 1.0,
       ),
@@ -81,19 +112,29 @@ class _Grid extends State<Grid> {
               margin: new EdgeInsets.all(20.0),
               child: new Column(
                 children: [
-                  new RaisedButton(
-                    child: new Text("Done", style: new TextStyle(fontSize: 20.0)),
+                  new IconButton(
+                    icon: new Icon(Icons.check),
+                    iconSize: 50.0,
                     onPressed: () {
                       var results = getDifferenceToExactResult();
-                      displayResults(results);
+                      if (madeMistake(results)){
+                        correctSliders(results);
+                        resultsText = "You made it through $score rounds!";
+                        new Timer(new Duration(seconds: 2), (){
+                          Navigator.of(context).pop();
+                        });
+                      }
+                      else {
+                        score++;
+                        resetSliders();
+                        revealSequence();
+                      }
                     },
                   ),
-                  new RaisedButton(
-                    child: new Text("Replay", style: new TextStyle(fontSize: 20.0)),
-                    onPressed: () {
-                      playSequence(random: false);
-                    },
-                  ),
+                  new Padding(
+                    padding: new EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+                    child: new Text(resultsText, style: new TextStyle(fontSize: 20.0)),
+                  )
                 ]
               ),
             ),

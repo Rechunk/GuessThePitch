@@ -4,6 +4,7 @@ import "countdown.dart";
 import "route.dart";
 import "grid.dart";
 import "config.dart";
+import "help.dart";
 
 class Menu extends StatefulWidget {
   @override
@@ -33,8 +34,11 @@ class _Menu extends State<Menu> {
                   builder: (_) => new Options()
               ));
             }),
-            new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Credits", style: new TextStyle(fontSize: 20.0)), onPressed: (){
-
+            new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Help", style: new TextStyle(fontSize: 20.0)), onPressed: (){
+              Navigator.push(context, new CustomRoute(
+                  leftToRight,
+                  builder: (_) => new Help()
+              ));
             }),
             new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Exit", style: new TextStyle(fontSize: 20.0)), onPressed: (){
 

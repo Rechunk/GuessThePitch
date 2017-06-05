@@ -30,16 +30,16 @@ playSequence({random: true}) async {
   }
 
   audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[0].toString()}.wav");
-  new Timer(new Duration(milliseconds: 500), () async {
+  new Timer(new Duration(milliseconds: 1000), () async {
     audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[1].toString()}.wav");
   });
-  new Timer(new Duration(milliseconds: 1000), () async {
+  new Timer(new Duration(milliseconds: 2000), () async {
     audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[2].toString()}.wav");
   });
-  new Timer(new Duration(milliseconds: 1500), () async {
+  new Timer(new Duration(milliseconds: 3000), () async {
     audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[3].toString()}.wav");
   });
-  new Timer(new Duration(milliseconds: 2000), () async {
+  new Timer(new Duration(milliseconds: 4000), () async {
     audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[4].toString()}.wav");
   });
   print(randomFrequencies);

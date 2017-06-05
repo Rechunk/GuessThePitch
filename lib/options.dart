@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "config.dart";
 
 class Options extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _Options extends State<Options> {
       appBar: new AppBar(
         title: new Text("Options"),
         leading: new Container(),
+        backgroundColor: mainColor,
         actions: [ new IconButton( icon: new Icon( Theme.of(context).platform == TargetPlatform.iOS ? Icons.arrow_forward_ios : Icons.arrow_forward), onPressed: () { Navigator.pop(context); })],
       ),
       body: new Center(
