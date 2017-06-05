@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "options.dart";
 import "route.dart";
-import "grid.dart";
+import "game.dart";
 import "config.dart";
 import "help.dart";
 
@@ -30,7 +30,7 @@ class _Menu extends State<Menu> {
                     child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Play", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       Navigator.push(context, new CustomRoute(
                           navigationDirection: rightToLeft,
-                          builder: (_) => new Grid()
+                          builder: (_) => new Game()
                       ));
                     }),
                   ),
@@ -61,8 +61,6 @@ class _Menu extends State<Menu> {
                 ]
               ),
             )
-
-
           ]
         ),
       ),
