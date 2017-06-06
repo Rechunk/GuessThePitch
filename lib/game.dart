@@ -20,16 +20,16 @@ class _Game extends State<Game> {
   @override
   void initState(){
     super.initState();
-    revealSequence();
+    triggerRandomSequence();
   }
 
-  void revealSequence(){
+  void triggerRandomSequence(){
     new Timer(new Duration(seconds: 1), (){
       playSequence(amountOfSliders, random: true);
     });
   }
 
-  void increaseSlidersUntilFive(){
+  void increaseSliderAmountUntilFive(){
     setState((){
       amountOfSliders += (amountOfSliders < 5) ? 1 : 0;
     });
@@ -71,9 +71,9 @@ class _Game extends State<Game> {
                             }
                             else {
                               score++;
-                              increaseSlidersUntilFive();
                               resetSliders();
-                              revealSequence();
+                              increaseSliderAmountUntilFive();
+                              triggerRandomSequence();
                             }
                           },
                         ),
@@ -119,15 +119,19 @@ class _Game extends State<Game> {
     return differences;
   }
 
-  void correctSliders(var results){
-    for (int i = 0; i < results.length; i++){
-      if (results[i] != 0){
+  void correctSliders(var differences){
+    for (int i = 0; i < differences.length; i++){
+      if (sliderIsInWrongPosition(differences[i])){
         setState((){
-          values[i] += results[i];
-          colors[i] = (results[i] == 1) ? Colors.orange : Colors.red;
+          values[i] += differences[i];
+          colors[i] = (differences[i] == 1) ? Colors.orange : Colors.red;
         });
       }
     }
+  }
+
+  bool sliderIsInWrongPosition(int difference){
+    return (difference == 0) ? false : true;
   }
 
   void resetSliders(){
