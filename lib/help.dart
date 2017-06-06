@@ -4,11 +4,12 @@ import "config.dart";
 class Help extends StatelessWidget {
 
   final textStyle = new TextStyle(fontSize: 20.0, fontFamily: "Quicksand");
-  final helpText = "Das Spiel beginnt, sobald du auf 'Play' drückst. "
-      "Innerhalb von einer Sekunde hörst du dann 5 Töne. Für jeden Ton steht "
-      "einer der Schieberegler. Schätze ein, wie hoch jeweils die Töne waren, "
-      "indem du sie einzeln bewegst. Drücke anschließend auf 'Done' und schaue "
-      "dir deine Ergebnisse an!";
+  final helpText = "The Game starts as soon as you hit 'Play'. In the first round,"
+      "you will only see one slider. A sound will play and you have to guess the frequency"
+      "of the sound by adjusting the slider from left(low frequency) to right(high frequency)."
+      "Click on the checkmark as soon as you are done. The next round you will need to adjust one more slider"
+      "and therefor, two sounds play. This continues upto five sliders. From this point on, fight for your"
+      "new highscore!";
 
   @override
   build(BuildContext context){
