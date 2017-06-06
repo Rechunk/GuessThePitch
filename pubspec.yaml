@@ -4,8 +4,11 @@ description: A new flutter project.
 dependencies:
   flutter:
     sdk: flutter
+  flutter_test:
+    sdk: flutter
   countdown: "^0.0.3"
   audioplayer: "0.2.0"
+  path_provider: "^0.2.1+1"
 
 flutter:
   uses-material-design: true
