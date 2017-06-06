@@ -4,6 +4,7 @@ import "route.dart";
 import "game.dart";
 import "config.dart";
 import "help.dart";
+import "highscore.dart";
 
 class Menu extends StatefulWidget {
   @override
@@ -12,6 +13,17 @@ class Menu extends StatefulWidget {
 
 class _Menu extends State<Menu> {
 
+  int highscore = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getHighscore().then((int value) {
+      setState(() {
+        highscore = value;
+      });
+    });
+  }
   @override
   build(BuildContext context){
     return new Container(
@@ -22,7 +34,11 @@ class _Menu extends State<Menu> {
             new Text("GUESS THE", style: new TextStyle(fontFamily: "Coiny", fontSize: 45.0, color: new Color(0xFF7F4937))),
             new Text("PITCH", style: new TextStyle(fontFamily: "Coiny", fontSize: 83.0, height: 0.1, color: mainColor)),
             new Container(
-              margin: new EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+              margin: new EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+              child: new Text("HIGHSCORE: $highscore", style: new TextStyle(fontFamily: "Coiny", fontSize: 20.0, color: new Color(0xFFFF916E))),
+            ),
+            new Container(
+              margin: new EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 0.0),
               child: new Column(
                 children: [
                   new Padding(
