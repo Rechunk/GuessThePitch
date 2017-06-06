@@ -13,6 +13,8 @@ class _Game extends State<Game> {
   List<int> values = new List.generate(5, (i) => 0);
   List<Color> colors = new List.generate(5, (i) => Colors.blue);
   List<Widget> sliders = [];
+  Widget sliderContainer;
+  int amountOfSliders = 1;
   int score = 0;
 
   @override
@@ -23,13 +25,19 @@ class _Game extends State<Game> {
 
   void revealSequence(){
     new Timer(new Duration(seconds: 1), (){
-      playSequence(random: true);
+      playSequence(amountOfSliders, random: true);
+    });
+  }
+
+  void increaseSlidersUntilFive(){
+    setState((){
+      amountOfSliders += (amountOfSliders < 5) ? 1 : 0;
     });
   }
 
   @override
   build(BuildContext context){
-    sliders = buildSlides();
+    sliders = buildSliders(amountOfSliders);
     return new Scaffold(
 
       body: new Container(
@@ -37,10 +45,14 @@ class _Game extends State<Game> {
               padding: new EdgeInsets.all(50.0),
               children: [
                 new Center(
-                    child: new Text("$score", style: new TextStyle(fontFamily: "Coiny", fontSize: 60.0, color: mainColor))
+                  child: new Text("$score", style: new TextStyle(fontFamily: "Coiny", fontSize: 60.0, color: mainColor))
                 ),
-                new Column(
-                  children: sliders,
+                new Container(
+                  height: 350.0,
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: sliders,
+                  )
                 ),
                 new Container(
                   margin: new EdgeInsets.all(20.0),
@@ -59,6 +71,7 @@ class _Game extends State<Game> {
                             }
                             else {
                               score++;
+                              increaseSlidersUntilFive();
                               resetSliders();
                               revealSequence();
                             }
@@ -76,33 +89,31 @@ class _Game extends State<Game> {
     );
   }
 
-  List<Widget> buildSlides(){
+  List<Widget> buildSliders(int amount){
     List<Widget> sliders = [];
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < amount; i++){
       sliders.add(
-        new Padding(
-          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-          child: new Slider(
-            value: values[i].toDouble(),
-            min: 0.0,
-            max: 5.0,
-            divisions: 5,
-            label: '${values[i]}',
-            activeColor: colors[i],
-            onChanged: (double newValue) {
-              setState(() {
-                values[i] = newValue.round();
-              });
-            },
-          )
-        ));
+        new Slider(
+          value: values[i].toDouble(),
+          min: 0.0,
+          max: 5.0,
+          divisions: 5,
+          label: '${values[i]}',
+          activeColor: colors[i],
+          onChanged: (double newValue) {
+            setState(() {
+              values[i] = newValue.round();
+            });
+          },
+        )
+      );
     }
     return sliders;
   }
 
   getDifferenceToExactResult(){
     List<int> differences = [];
-    for (int i = 0; i < values.length; i++){
+    for (int i = 0; i < sliders.length; i++){
       differences.add(randomFrequencies[i] - values[i]);
     }
     return differences;
@@ -120,7 +131,7 @@ class _Game extends State<Game> {
   }
 
   void resetSliders(){
-    for (int i = 0; i < values.length; i++){
+    for (int i = 0; i < sliders.length; i++){
       setState((){
         values[i] = 0;
       });
