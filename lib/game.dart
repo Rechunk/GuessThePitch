@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import "soundManager.dart";
 import "dart:async";
 import "config.dart";
+import "highscore.dart";
 
 class Game extends StatefulWidget {
   @override
@@ -60,9 +61,11 @@ class _Game extends State<Game> {
                       children: [
                         new IconButton(
                           icon: new Icon(Icons.check),
+                          color: new Color(0xFF7F4937),
                           iconSize: 50.0,
                           onPressed: () {
                             var results = getDifferenceToExactResult();
+                            setNewHighscore(score);
                             if (madeMistake(results)){
                               correctSliders(results);
                               new Timer(new Duration(seconds: 2), (){
