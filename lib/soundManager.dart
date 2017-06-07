@@ -18,6 +18,7 @@ int pickRandomSoundFrequency(){
 play(int soundFrequency) async {
   final result = await audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav");
 }
+
 playSequence(int amount, {random: true}) async {
 
   if (random) {
