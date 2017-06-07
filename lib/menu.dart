@@ -5,15 +5,17 @@ import "game.dart";
 import "config.dart";
 import "help.dart";
 import "highscore.dart";
+import "dart:io";
 
 class Menu extends StatefulWidget {
   @override
   _Menu createState() => new _Menu();
 }
+int highscore = 0;
+
 
 class _Menu extends State<Menu> {
 
-  int highscore = 0;
 
   @override
   void initState() {
@@ -71,12 +73,12 @@ class _Menu extends State<Menu> {
                   new Padding(
                     padding: new EdgeInsets.all(13.0),
                     child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Exit", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
-
+                      exit(0);
                     }),
                   ),
                 ]
               ),
-            )
+            ),
           ]
         ),
       ),
