@@ -8,11 +8,12 @@ typedef void OnError(Exception exception);
 //enum PlayerState { isPlaying, isStopped }
 
 AudioPlayer audioPlayer = new AudioPlayer();
+List<int> randomFrequencies = [];
+int delayBetweenSounds = 2;
 
 int pickRandomSoundFrequency(){
   return new Random().nextInt(5) + 1;
 }
-List<int> randomFrequencies = [];
 
 play(int soundFrequency) async {
   final result = await audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav");
@@ -27,7 +28,7 @@ playSequence(int amount, {random: true}) async {
   }
 
   for (int i = 0; i < randomFrequencies.length; i++){
-    new Timer(new Duration(seconds: i * 3), () async {
+    new Timer(new Duration(seconds: i * delayBetweenSounds), () async {
       audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[i].toString()}.wav");
     });
   }
