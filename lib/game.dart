@@ -3,6 +3,7 @@ import "soundManager.dart";
 import "dart:async";
 import "config.dart";
 import "highscore.dart";
+import "menu.dart";
 
 class Game extends StatefulWidget {
   @override
@@ -65,7 +66,8 @@ class _Game extends State<Game> {
                           iconSize: 50.0,
                           onPressed: () {
                             var results = getDifferenceToExactResult();
-                            setNewHighscore(score);
+                            updateScoreIfIsHighestEver();
+
                             if (madeMistake(results)){
                               correctSliders(results);
                               new Timer(new Duration(seconds: 2), (){
@@ -90,6 +92,15 @@ class _Game extends State<Game> {
           )
       ),
     );
+  }
+
+  void updateScoreIfIsHighestEver(){
+    getHighscore().then((int value){
+      if (score > value){
+        writeHighscoreToStorage(score);
+        highscore = score;
+      }
+    });
   }
 
   List<Widget> buildSliders(int amount){
