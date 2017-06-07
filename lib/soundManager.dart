@@ -5,8 +5,6 @@ import 'package:audioplayer/audioplayer.dart';
 
 typedef void OnError(Exception exception);
 
-//enum PlayerState { isPlaying, isStopped }
-
 AudioPlayer audioPlayer = new AudioPlayer();
 List<int> randomFrequencies = [];
 int delayBetweenSounds = 2;
