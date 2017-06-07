@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "config.dart";
+import "soundManager.dart";
 
 class Playground extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _Playground extends State<Playground> {
   build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Help", style: new TextStyle(fontFamily: "Quicksand")),
+        title: new Text("Practise", style: new TextStyle(fontFamily: "Quicksand")),
         backgroundColor: mainColor,
       ),
       body: new Column(
@@ -29,14 +30,18 @@ class _Playground extends State<Playground> {
             onChanged: (double newValue) {
               setState(() {
                 currentValue = newValue.round();
-              }
-              );
+              });
             },
           ),
           new IconButton(
-            icon: new Icon(Icons.volume_up),
+            icon: new Icon(Icons.volume_up, color: Colors.grey),
             onPressed: (){
-
+              if (currentValue == 0) {
+                setState((){
+                  currentValue = 1;
+                });
+              }
+              play(currentValue);
             }
           ),
         ]
