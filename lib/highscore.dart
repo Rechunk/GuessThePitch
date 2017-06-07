@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
+import "menu.dart";
 
 Future<File> getLocalFile() async {
   String dir = (await getApplicationDocumentsDirectory()).path;
@@ -17,6 +18,6 @@ Future<int> getHighscore() async {
   }
 }
 
-Future<Null> setNewHighscore(int score) async {
+Future<Null> writeHighscoreToStorage(int score) async {
   await (await getLocalFile()).writeAsString('$score');
 }
