@@ -62,13 +62,14 @@ class _Game extends State<Game> {
                       children: [
                         new IconButton(
                           icon: new Icon(Icons.check),
-                          color: new Color(0xFF7F4937),
+                          color: Colors.grey,
                           iconSize: 50.0,
                           onPressed: () {
                             var results = getDifferenceToExactResult();
-                            updateScoreIfIsHighestEver();
 
                             if (madeMistake(results)){
+                              shouldPlayNext = false;
+                              updateScoreIfIsHighestEver();
                               correctSliders(results);
                               new Timer(new Duration(seconds: 2), (){
                                 Navigator.of(context).pop();
