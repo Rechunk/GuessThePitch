@@ -8,13 +8,14 @@ typedef void OnError(Exception exception);
 AudioPlayer audioPlayer = new AudioPlayer();
 List<int> randomFrequencies = [];
 int delayBetweenSounds = 2;
+bool shouldPlayNext = true;
 
 int pickRandomSoundFrequency(){
   return new Random().nextInt(5) + 1;
 }
 
 play(int soundFrequency) async {
-  final result = await audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${soundFrequency.toString()}.wav");
+  final result = await audioPlayer.play("https://rechunk.com/wp-content/uploads/Pitch-${soundFrequency.toString()}.wav");
 }
 
 playSequence(int amount, {random: true}) async {
@@ -28,8 +29,16 @@ playSequence(int amount, {random: true}) async {
 
   for (int i = 0; i < randomFrequencies.length; i++){
     new Timer(new Duration(seconds: i * delayBetweenSounds), () async {
-      audioPlayer.play("https://rechunk.com/wp-content/uploads/2017/06/Pitch-${randomFrequencies[i].toString()}.wav");
+      if (shouldPlayNext) {
+        audioPlayer.play(
+            "https://rechunk.com/wp-content/uploads/Pitch-${randomFrequencies[i]
+                .toString()}.wav");
+      }
     });
   }
   print(randomFrequencies);
+}
+
+stop() async {
+  await audioPlayer.stop();
 }
