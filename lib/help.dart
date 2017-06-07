@@ -25,6 +25,14 @@ class Help extends StatelessWidget {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              new Container(
+                padding: new EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
+                child: new Text("Make sure to turn up your volume!", style: new TextStyle(color: Colors.grey, fontSize: 25.0)),
+              ),
+              new Padding(
+                padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                child: new Icon(Icons.volume_up, color: Colors.grey, size: 40.0),
+              ),
               new Padding(
                 padding: new EdgeInsets.all(20.0),
                 child: new Text(helpText, style: textStyle),
