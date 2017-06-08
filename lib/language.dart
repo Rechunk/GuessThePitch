@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import "file_access.dart";
-
-Color mainColor = new Color(0xFFFF5722);
+import "game.dart";
 
 enum Language { ENGLISH, GERMAN }
 
@@ -14,6 +13,13 @@ String helpButtonText = "";
 String exitButtonText = "";
 String helpInternetText = "";
 String helpText = "";
+
+Color darkOverlay = new Color.fromARGB(150, 0, 0, 0);
+
+List<Color> overlayColors = [
+  darkOverlay,
+  darkOverlay,
+];
 
 void setupAllTexts(Language selectedLanguage){
   switch(selectedLanguage){
@@ -30,6 +36,7 @@ void setupAllTexts(Language selectedLanguage){
           "Click on the checkmark as soon as you are done. The next round you will need to adjust one more slider "
           "and therefor, two sounds play. This continues upto five sliders. From this point on, fight for your "
           "new highscore!";
+      overlayColors[0] = Colors.transparent;
       break;
     case Language.GERMAN:
       playButtonText = "Spielen";
@@ -38,9 +45,10 @@ void setupAllTexts(Language selectedLanguage){
       helpButtonText = "Hilfe";
       exitButtonText = "Verlassen";
       helpInternetText = "Achtung: Internetverbindung erforderlich";
-      helpText = "Das Spiel startet, sobald du auf 'Spielen' drückst.\n\n Du hörst nun einen Ton. Schätze durch das"
+      helpText = "Das Spiel startet, sobald du auf 'Spielen' drückst.\n\nDu hörst nun einen Ton. Schätze durch das"
           " schieben des Schiebereglers ein, wie hoch dieser Ton war (links = tief, rechts = hoch).\n\nMit jeder Runde kommt ein Ton"
           " hinzu, bis es schließlich fünf werden. Kämpfe von dort an um deinen neuen Highscore!";
+      overlayColors[1] = Colors.transparent;
       break;
   }
 }
@@ -51,6 +59,13 @@ class Options extends StatefulWidget {
 }
 
 class _Options extends State<Options> {
+
+  void darkenAllFlags() {
+    for (int i = 0; i < overlayColors.length; i++){
+      overlayColors[i] = darkOverlay;
+    }
+  }
+
   @override
   build(BuildContext context){
     return new Scaffold(
@@ -64,26 +79,35 @@ class _Options extends State<Options> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-
             new GestureDetector(
                 onTap: (){
                   writeLanguageToStorage(Language.ENGLISH);
                   setState((){
+                    darkenAllFlags();
+                    overlayColors[0] = Colors.transparent;
                     setupAllTexts(Language.ENGLISH);
                   });                },
                 child: new Image.asset(
                   "images/english-flag.png",
+                  colorBlendMode: BlendMode.darken,
+                  fit: BoxFit.fill,
+                  color: overlayColors[0],
                 ),
             ),
             new GestureDetector(
               onTap: (){
                 writeLanguageToStorage(Language.GERMAN);
                 setState((){
+                  darkenAllFlags();
+                  overlayColors[1] = Colors.transparent;
                   setupAllTexts(Language.GERMAN);
                 });
               },
               child: new Image.asset(
                 "images/german-flag.png",
+                colorBlendMode: BlendMode.darken,
+                fit: BoxFit.fill,
+                color: overlayColors[1],
               ),
             ),
           ]

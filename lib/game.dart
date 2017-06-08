@@ -5,6 +5,8 @@ import "language.dart";
 import "file_access.dart";
 import "menu.dart";
 
+Color mainColor = new Color(0xFFFF5722);
+
 class Game extends StatefulWidget {
   @override
   _Game createState() => new _Game();
@@ -18,6 +20,7 @@ class _Game extends State<Game> {
   Widget sliderContainer;
   int amountOfSliders = 1;
   int score = 0;
+  bool gameIsOver = false;
 
   @override
   void initState(){
@@ -65,23 +68,26 @@ class _Game extends State<Game> {
                           color: Colors.grey,
                           iconSize: 50.0,
                           onPressed: () {
-                            var results = getDifferenceToExactResult();
+                            if (!gameIsOver) {
+                              var results = getDifferenceToExactResult();
 
-                            if (madeMistake(results)){
-                              shouldPlayNext = false;
-                              updateScoreIfIsHighestEver();
-                              correctSliders(results);
-                              new Timer(new Duration(seconds: 2), (){
-                                Navigator.of(context).pop();
-                              });
+                              if (madeMistake(results)) {
+                                gameIsOver = true;
+                                shouldPlayNext = false;
+                                updateScoreIfIsHighestEver();
+                                correctSliders(results);
+                                new Timer(new Duration(seconds: 2), () {
+                                  Navigator.of(context).pop();
+                                });
+                              }
+                              else {
+                                score++;
+                                resetSliders();
+                                increaseSliderAmountUntilFive();
+                                triggerRandomSequence();
+                              }
                             }
-                            else {
-                              score++;
-                              resetSliders();
-                              increaseSliderAmountUntilFive();
-                              triggerRandomSequence();
-                            }
-                          },
+                          }
                         ),
                         new Padding(
                           padding: new EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),

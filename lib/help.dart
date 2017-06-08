@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "language.dart";
+import "game.dart";
 
 class Help extends StatelessWidget {
 
