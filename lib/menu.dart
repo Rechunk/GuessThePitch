@@ -3,9 +3,11 @@ import "route.dart";
 import "game.dart";
 import "config.dart";
 import "help.dart";
-import "highscore.dart";
+import "file_access.dart";
 import "dart:io";
 import "practise.dart";
+import "soundManager.dart";
+import "language.dart";
 
 class Menu extends StatefulWidget {
   @override
@@ -16,11 +18,10 @@ int highscore = 0;
 
 class _Menu extends State<Menu> {
 
-
   @override
   void initState() {
     super.initState();
-    getHighscore().then((int value) {
+    getCurrentHighscore().then((int value) {
       setState(() {
         highscore = value;
       });
@@ -45,7 +46,8 @@ class _Menu extends State<Menu> {
                 children: [
                   new Padding(
                     padding: new EdgeInsets.all(13.0),
-                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Play", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
+                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text(playButtonText, style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
+                      shouldPlayNext = true;
                       Navigator.push(context, new CustomRoute(
                           navigationDirection: rightToLeft,
                           builder: (_) => new Game()
@@ -54,7 +56,7 @@ class _Menu extends State<Menu> {
                   ),
                   new Padding(
                     padding: new EdgeInsets.all(13.0),
-                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Practise", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
+                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text(practiseButtonText, style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       Navigator.push(context, new CustomRoute(
                           navigationDirection: rightToLeft,
                           builder: (_) => new Playground()
@@ -63,7 +65,16 @@ class _Menu extends State<Menu> {
                   ),
                   new Padding(
                     padding: new EdgeInsets.all(13.0),
-                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Help", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
+                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text(languageButtonText, style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
+                      Navigator.push(context, new CustomRoute(
+                          navigationDirection: leftToRight,
+                          builder: (_) => new Options()
+                      ));
+                    }),
+                  ),
+                  new Padding(
+                    padding: new EdgeInsets.all(13.0),
+                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text(helpButtonText, style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       Navigator.push(context, new CustomRoute(
                           navigationDirection: leftToRight,
                           builder: (_) => new Help()
@@ -72,7 +83,7 @@ class _Menu extends State<Menu> {
                   ),
                   new Padding(
                     padding: new EdgeInsets.all(13.0),
-                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text("Exit", style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
+                    child: new RaisedButton(color: Colors.transparent, elevation: 0.0, highlightElevation: 0.0, splashColor: Colors.red, child: new Text(exitButtonText, style: new TextStyle(fontSize: 23.0, fontFamily: "Quicksand")), onPressed: (){
                       exit(0);
                     }),
                   ),

@@ -12,6 +12,9 @@ dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+        - images/german-flag.png
+        - images/english-flag.png
   fonts:
    - family: Coiny
      fonts:

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "config.dart";
+import "language.dart";
 import "soundManager.dart";
 
 class Playground extends StatefulWidget {
@@ -15,7 +15,7 @@ class _Playground extends State<Playground> {
   build(BuildContext context){
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Practise", style: new TextStyle(fontFamily: "Quicksand")),
+        title: new Text(practiseButtonText, style: new TextStyle(fontFamily: "Quicksand")),
         backgroundColor: mainColor,
       ),
       body: new Column(

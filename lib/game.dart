@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import "soundManager.dart";
 import "dart:async";
-import "config.dart";
-import "highscore.dart";
+import "language.dart";
+import "file_access.dart";
 import "menu.dart";
 
 class Game extends StatefulWidget {
@@ -96,7 +96,7 @@ class _Game extends State<Game> {
   }
 
   void updateScoreIfIsHighestEver(){
-    getHighscore().then((int value){
+    getCurrentHighscore().then((int value){
       if (score > value){
         writeHighscoreToStorage(score);
         highscore = score;

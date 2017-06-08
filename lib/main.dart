@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import "menu.dart";
+import "language.dart";
+import "file_access.dart";
 
 void main() {
+  getCurrentLanguage().then((lang) => setupAllTexts(lang));
   runApp(new MyApp());
 }
 
