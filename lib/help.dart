@@ -22,25 +22,24 @@ class Help extends StatelessWidget {
           })],
       ),
       body: new Container(
-        child: new Center(
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              new Padding(
-                padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                child: new Icon(Icons.volume_up, color: Colors.grey, size: 100.0),
-              ),
-              new Padding(
-                padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                child: new Text(helpInternetText, style: new TextStyle(color: Colors.grey)),
-              ),
-              new Padding(
-                padding: new EdgeInsets.all(20.0),
-                child: new Text(helpText, style: textStyle),
-              ),
-            ]
-          )
-        ),
+        width: 500.0,
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            new Padding(
+              padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+              child: new Icon(Icons.volume_up, color: Colors.grey, size: 100.0),
+            ),
+            new Padding(
+              padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+              child: new Text(helpInternetText, textAlign: TextAlign.left, style: new TextStyle(color: Colors.grey)),
+            ),
+            new Padding(
+              padding: new EdgeInsets.all(20.0),
+              child: new Text(helpText, style: textStyle),
+            ),
+          ]
+        )
       )
     );
   }

@@ -75,24 +75,81 @@ class _Options extends State<Options> {
         backgroundColor: mainColor,
         actions: [ new IconButton( icon: new Icon( Theme.of(context).platform == TargetPlatform.iOS ? Icons.arrow_forward_ios : Icons.arrow_forward), onPressed: () { Navigator.pop(context); })],
       ),
-      body: new Center(
+      body: new ListView(
+        children: [
+          new GestureDetector(
+            onTap: (){
+              writeLanguageToStorage(Language.ENGLISH);
+              setState((){
+                darkenAllFlags();
+                overlayColors[0] = Colors.transparent;
+                setupAllTexts(Language.ENGLISH);
+              });                },
+            child: new Image.asset(
+              "images/english-flag.png",
+              colorBlendMode: BlendMode.darken,
+              fit: BoxFit.fill,
+              color: overlayColors[0],
+            ),
+          ),
+          new GestureDetector(
+            onTap: (){
+              writeLanguageToStorage(Language.GERMAN);
+              setState((){
+                darkenAllFlags();
+                overlayColors[1] = Colors.transparent;
+                setupAllTexts(Language.GERMAN);
+              });
+            },
+            child: new Image.asset(
+              "images/german-flag.png",
+              colorBlendMode: BlendMode.darken,
+              fit: BoxFit.fill,
+              color: overlayColors[1],
+            ),
+          ),
+          new GestureDetector(
+            onTap: (){
+              writeLanguageToStorage(Language.GERMAN);
+              setState((){
+                darkenAllFlags();
+                overlayColors[1] = Colors.transparent;
+                setupAllTexts(Language.GERMAN);
+              });
+            },
+            child: new Image.asset(
+              "images/german-flag.png",
+              colorBlendMode: BlendMode.darken,
+              fit: BoxFit.fill,
+              color: overlayColors[1],
+            ),
+          ),
+        ]
+      )
+    );
+  }
+}
+
+/*
+body: new Center(
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+
             new GestureDetector(
-                onTap: (){
-                  writeLanguageToStorage(Language.ENGLISH);
-                  setState((){
-                    darkenAllFlags();
-                    overlayColors[0] = Colors.transparent;
-                    setupAllTexts(Language.ENGLISH);
-                  });                },
-                child: new Image.asset(
-                  "images/english-flag.png",
-                  colorBlendMode: BlendMode.darken,
-                  fit: BoxFit.fill,
-                  color: overlayColors[0],
-                ),
+              onTap: (){
+                writeLanguageToStorage(Language.ENGLISH);
+                setState((){
+                  darkenAllFlags();
+                  overlayColors[0] = Colors.transparent;
+                  setupAllTexts(Language.ENGLISH);
+                });                },
+              child: new Image.asset(
+                "images/english-flag.png",
+                colorBlendMode: BlendMode.darken,
+                fit: BoxFit.fill,
+                color: overlayColors[0],
+              ),
             ),
             new GestureDetector(
               onTap: (){
@@ -113,6 +170,4 @@ class _Options extends State<Options> {
           ]
         ),
       ),
-    );
-  }
-}
+ */

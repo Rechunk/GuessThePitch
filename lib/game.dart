@@ -4,8 +4,10 @@ import "dart:async";
 import "language.dart";
 import "file_access.dart";
 import "menu.dart";
+import "score_counter.dart";
 
 Color mainColor = new Color(0xFFFF5722);
+int score = 0;
 
 class Game extends StatefulWidget {
   @override
@@ -19,7 +21,6 @@ class _Game extends State<Game> {
   List<Widget> sliders = [];
   Widget sliderContainer;
   int amountOfSliders = 1;
-  int score = 0;
   bool gameIsOver = false;
 
   @override
@@ -50,7 +51,7 @@ class _Game extends State<Game> {
               padding: new EdgeInsets.all(50.0),
               children: [
                 new Center(
-                  child: new Text("$score", style: new TextStyle(fontFamily: "Coiny", fontSize: 60.0, color: mainColor))
+                  child: new ScoreCounter(),
                 ),
                 new Container(
                   height: 350.0,
