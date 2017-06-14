@@ -15,6 +15,8 @@ flutter:
   assets:
         - images/german-flag.png
         - images/english-flag.png
+        - images/italian-flag.png
+
   fonts:
    - family: Coiny
      fonts:

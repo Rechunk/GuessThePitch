@@ -58,7 +58,7 @@ class _Game extends State<Game> {
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: sliders,
-                  )
+                  ),
                 ),
                 new Container(
                   margin: new EdgeInsets.all(20.0),

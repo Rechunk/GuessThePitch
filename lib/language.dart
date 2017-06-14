@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import "file_access.dart";
 import "game.dart";
 
-enum Language { ENGLISH, GERMAN }
+enum Language { ENGLISH, GERMAN, ITALIAN }
 
 Language language = Language.ENGLISH;
 
@@ -17,6 +17,7 @@ String helpText = "";
 Color darkOverlay = new Color.fromARGB(150, 0, 0, 0);
 
 List<Color> overlayColors = [
+  darkOverlay,
   darkOverlay,
   darkOverlay,
 ];
@@ -49,6 +50,18 @@ void setupAllTexts(Language selectedLanguage){
           " schieben des Schiebereglers ein, wie hoch dieser Ton war (links = tief, rechts = hoch).\n\nMit jeder Runde kommt ein Ton"
           " hinzu, bis es schließlich fünf werden. Kämpfe von dort an um deinen neuen Highscore!";
       overlayColors[1] = Colors.transparent;
+      break;
+    case Language.ITALIAN:
+      playButtonText = "Gioca";
+      practiseButtonText = "Pratica";
+      languageButtonText = "Lingua";
+      helpButtonText = "Aiuto";
+      exitButtonText = "Lascia";
+      helpInternetText = "Attento: Connectione internet richiesta";
+      helpText = "Il gioco initzia, quando premi su 'Gioca'. Ora, sentirai un tono. Apprezza la frequenza del tono e muovi il rigolatore"
+          " scorrevole (sinistra = profondo, destra = alto). Ogni tondo un altro rigolo scorrevole vienera e sentirai un altro tono"
+          " , finche sei arrivato a cinque. Ora, lotta per il tuo Highscore!";
+      overlayColors[2] = Colors.transparent;
       break;
   }
 }
@@ -110,18 +123,18 @@ class _Options extends State<Options> {
           ),
           new GestureDetector(
             onTap: (){
-              writeLanguageToStorage(Language.GERMAN);
+              writeLanguageToStorage(Language.ITALIAN);
               setState((){
                 darkenAllFlags();
-                overlayColors[1] = Colors.transparent;
-                setupAllTexts(Language.GERMAN);
+                overlayColors[2] = Colors.transparent;
+                setupAllTexts(Language.ITALIAN);
               });
             },
             child: new Image.asset(
-              "images/german-flag.png",
+              "images/italian-flag.png",
               colorBlendMode: BlendMode.darken,
               fit: BoxFit.fill,
-              color: overlayColors[1],
+              color: overlayColors[2],
             ),
           ),
         ]
